@@ -4,7 +4,9 @@ const serviceRoutes = (app, db) => {
   app.get('/specialists', (req, res) => {
     let findCriteria = {};
 
-    if (req.query.services !== 'undefined') {
+    res.header('Access-Control-Allow-Origin', '*');
+
+    if (typeof (req.query.services) !== 'undefined') {
       const servicesArray = req.query.services.split(',');
       findCriteria = { services: servicesArray };
     }
