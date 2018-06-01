@@ -2,6 +2,8 @@ import { ObjectID } from 'mongodb';
 
 const serviceRoutes = (app, db) => {
   app.get('/services', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+
     db.collection('services').find({}).toArray((findError, items) => {
       if (findError) {
         res.send({ error: 'An error has occurred' });
