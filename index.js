@@ -12,7 +12,9 @@ const dbName = 'youareprogrammer';
 
 app.use(bodyParser.json());
 
-MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (err, client) => {
+MongoClient.connect(CONNECTION_URL, {
+  useNewUrlParser: true
+}, (err, client) => {
   if (err) return console.log(err);
 
   const db = client.db(dbName);

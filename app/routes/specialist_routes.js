@@ -1,5 +1,3 @@
-import { ObjectID } from 'mongodb';
-
 const serviceRoutes = (app, db) => {
   app.get('/specialists', (req, res) => {
     let findCriteria = {};
@@ -8,25 +6,17 @@ const serviceRoutes = (app, db) => {
 
     if (typeof (req.query.services) !== 'undefined') {
       const servicesArray = req.query.services.split(',');
-      findCriteria = { services: servicesArray };
+      findCriteria = {
+        services: servicesArray,
+      };
     }
     db.collection('specialists').find(findCriteria).toArray((err, items) => {
       if (err) {
-        res.send({ error: 'An error has occurred' });
+        res.send({
+          error: 'An error has occurred',
+        });
       } else {
         res.send(items);
-      }
-    });
-  });
-
-  app.get('/specialists/:id', (req, res) => {
-    const { id } = req.params;
-    const details = { _id: new ObjectID(id) };
-    db.collection('specialists').findOne(details, (err, item) => {
-      if (err) {
-        res.send({ error: 'An error has occurred' });
-      } else {
-        res.send(item);
       }
     });
   });
@@ -42,7 +32,9 @@ const serviceRoutes = (app, db) => {
     };
     db.collection('specialists').insert(specialist, (err, result) => {
       if (err) {
-        res.send({ error: 'An error has occurred' });
+        res.send({
+          error: 'An error has occurred',
+        });
       } else {
         res.send(result.ops[0]);
       }
